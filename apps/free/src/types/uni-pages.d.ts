@@ -6,7 +6,8 @@
 type _LocationUrl =
   "/pages/index/index" |
   "/pages/about/about" |
-  "/pages/me/me";
+  "/pages/me/me" |
+  "/pages/wotui-demo/wotui-demo";
 
 interface NavigateToOptions {
   url: _LocationUrl;

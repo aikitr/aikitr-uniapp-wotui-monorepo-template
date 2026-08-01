@@ -3,7 +3,7 @@ alwaysApply: true
 ---
 # aikitr uniapp 项目概览
 
-这是一个基于 uniapp + Vue3 + TypeScript + Vite5 + UnoCSS 的跨平台开发框架。
+这是一个基于 uniapp + Vue3 + TypeScript + Vite5 + UnoCSS + wot-ui 的跨平台开发框架。
 
 ## 项目特点
 - 支持 H5、小程序、APP 多平台开发

@@ -11,7 +11,8 @@
     "./styles/*": "./src/styles/*"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "wot-design-uni": "^1.5.0"
   },
   "devDependencies": {
     "@uni-helper/unocss-preset-uni": "0.2.11",
