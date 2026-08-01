@@ -41,6 +41,9 @@ importers:
       vue:
         specifier: ^3.4.21
         version: 3.5.40(typescript@5.8.3)
+      wot-design-uni:
+        specifier: ^1.5.0
+        version: 1.14.0(vue@3.5.40(typescript@5.8.3))
     devDependencies:
       '@dcloudio/vite-plugin-uni':
         specifier: 3.0.0-4070620250821001
