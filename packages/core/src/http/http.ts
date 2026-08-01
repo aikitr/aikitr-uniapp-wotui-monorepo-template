@@ -1,9 +1,9 @@
-import type { IDoubleTokenRes } from './api/types/login'
-import type { CustomRequestOptions, HttpError, IResponse } from './http/types'
+import type { IDoubleTokenRes } from '../api/types/login'
+import type { CustomRequestOptions, HttpError, IResponse } from '../http/types'
 import { nextTick } from 'vue'
-import { useTokenStore } from './store/token'
-import { isDoubleTokenMode } from './utils/index'
-import { toLoginPage } from './utils/toLoginPage'
+import { useTokenStore } from '../store/token'
+import { isDoubleTokenMode } from '../utils/index'
+import { toLoginPage } from '../utils/toLoginPage'
 import { createHttpError, getResponseMessage, HttpErrorType, isSuccessResultCode, ResultEnum, ShowMessage } from './tools/enum'
 
 // 刷新 token 状态管理

@@ -1,5 +1,5 @@
-import { getLastPage } from './utils/index'
-import { debounce } from './utils/debounce'
+import { getLastPage } from '../utils/index'
+import { debounce } from '../utils/debounce'
 
 interface ToLoginPageOptions {
   /**

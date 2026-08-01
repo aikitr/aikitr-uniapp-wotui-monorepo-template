@@ -1,5 +1,5 @@
 import type { IAuthLoginRes, ICaptcha, IDoubleTokenRes, IUpdateInfo, IUpdatePassword, IUserInfoRes } from './types/login'
-import { http } from './http/http'
+import { http } from '../http/http'
 
 /**
  * 登录表单

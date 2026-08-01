@@ -1,4 +1,4 @@
-import { http } from './http/http'
+import { http } from '../http/http'
 
 export interface IFoo {
   id: number

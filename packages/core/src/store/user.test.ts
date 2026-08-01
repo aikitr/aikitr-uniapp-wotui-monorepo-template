@@ -1,4 +1,4 @@
-import { getUserInfo } from './api/login'
+import { getUserInfo } from '../api/login'
 import { describe, expect, it, vi } from 'vitest'
 import { useUserStore } from './user'
 

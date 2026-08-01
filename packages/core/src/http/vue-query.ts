@@ -1,5 +1,5 @@
-import type { CustomRequestOptions } from './http/types'
-import { http } from './http'
+import type { CustomRequestOptions } from '../http/types'
+import { http } from '../http'
 
 /*
  * openapi-ts-request 工具的 request 跨客户端适配方法
