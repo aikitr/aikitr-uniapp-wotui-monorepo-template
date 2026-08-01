@@ -1,9 +1,9 @@
-import type { IUserInfoRes } from './api/types/login'
+import type { IUserInfoRes } from '../api/types/login'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {
   getUserInfo,
-} from './api/login'
+} from '../api/login'
 
 // 初始化状态
 const userInfoState: IUserInfoRes = {
