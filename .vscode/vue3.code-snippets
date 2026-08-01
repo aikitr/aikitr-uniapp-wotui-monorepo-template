@@ -1,0 +1,89 @@
+{
+  // Place your aikitr workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  "Print aikitr Vue3 SFC": {
+    "prefix": "aikitr-vue3",
+    "body": [
+      "<template>",
+      "\t<view></view>",
+      "</template>",
+      "",
+      "<script setup lang=\"ts\">",
+      "defineOptions({",
+      "\tname: '${1:Component}',",
+      "})",
+      "",
+      "definePage({",
+      "\t// 使用 type: \"home\" 属性设置首页，其他页面不需要设置，默认为page",
+      "\ttype: 'home',",
+      "\tstyle: {",
+      "\t\t// 'custom' 表示开启自定义导航栏，默认 'default'",
+      "\t\tnavigationStyle: 'custom',",
+      "\t\tnavigationBarTitleText: '${1:Component}',",
+      "\t},",
+      "})",
+      "",
+      "const { proxy } = getCurrentInstance() as ComponentInternalInstance",
+      "",
+      "onLoad(() => {",
+      "\tconsole.log('测试 uni API 自动引入: onLoad')",
+      "})",
+      "</script>",
+      "",
+      "<style lang=\"scss\" scoped>",
+      "</style>"
+    ],
+    "description": "Print aikitr Vue3 SFC template"
+  },
+  "Print aikitr style": {
+    "prefix": "aikitr-style",
+    "body": [
+      "<style lang=\"scss\" scoped>",
+      "\t.${1:class-name} {",
+      "\t\t$2",
+      "\t}",
+      "</style>"
+    ],
+    "description": "Print aikitr style block"
+  },
+  "Print aikitr script with definePage": {
+    "prefix": "aikitr-script",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "defineOptions({",
+      "\tname: '${1:Component}',",
+      "})",
+      "",
+      "definePage({",
+      "\ttype: 'home',",
+      "\tstyle: {",
+      "\t\tnavigationStyle: 'custom',",
+      "\t\tnavigationBarTitleText: '${1:Component}',",
+      "\t},",
+      "})",
+      "",
+      "const { proxy } = getCurrentInstance() as ComponentInternalInstance",
+      "",
+      "onLoad(() => {",
+      "\tconsole.log('test')",
+      "})",
+      "</script>"
+    ],
+    "description": "Print aikitr script with definePage"
+  },
+  "Print aikitr template": {
+    "prefix": "aikitr-template",
+    "body": [
+      "<template>",
+      "\t<view>",
+      "\t\t${1}",
+      "\t</view>",
+      "</template>"
+    ],
+    "description": "Print aikitr template block"
+  }
+}
