@@ -6,10 +6,10 @@
   "description": "aikitr uniapp wotui monorepo template - a quick-start scaffold for uniapp development",
   "license": "MIT",
   "scripts": {
-    "dev:app-a": "pnpm --filter app-a dev:h5",
-    "build:app-a": "pnpm --filter app-a build:h5",
-    "dev:mp": "pnpm --filter app-a dev:mp",
-    "build:mp": "pnpm --filter app-a build:mp",
+    "dev:free": "pnpm --filter free dev:h5",
+    "build:free": "pnpm --filter free build:h5",
+    "dev:mp": "pnpm --filter free dev:mp",
+    "build:mp": "pnpm --filter free build:mp",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

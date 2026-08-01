@@ -1,4 +1,4 @@
-import { tabbarStore } from 'tabbar/store'
+import { tabbarStore } from '@aikitr/ui/components/tabbar/store'
 
 export const permission = {
   install(router) {

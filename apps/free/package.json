@@ -1,5 +1,5 @@
 {
-  "name": "app-a",
+  "name": "free",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -36,7 +36,6 @@
     "@uni-ku/bundle-optimizer": "v1.3.15-beta.2",
     "@uni-ku/root": "1.4.1",
     "rollup-plugin-visualizer": "^6.0.3",
-    "fs-extra": "^11.3.0",
     "typescript": "~5.8.0",
     "unocss": "66.0.0",
     "unplugin-auto-import": "^20.0.0",
