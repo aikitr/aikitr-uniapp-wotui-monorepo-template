@@ -1,0 +1,5 @@
+export { default as Tabbar } from './tabbar/index.vue'
+export { default as TabbarItem } from './tabbar/TabbarItem.vue'
+export type { CustomTabBarItem, NativeTabBarItem } from './tabbar/types'
+export * from './tabbar/store'
+export * from './tabbar/config'

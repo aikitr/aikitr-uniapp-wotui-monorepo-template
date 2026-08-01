@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@aikitr/core/*": ["../../packages/core/src/*"],
+      "@aikitr/ui/*": ["../../packages/ui/src/*"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts",
+    "manifest.config.ts",
+    "pages.config.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

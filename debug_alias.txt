@@ -1,0 +1,16 @@
+# pkg: @aikitr/core 路径别名解析
+alias: '@' -> 'packages/core/src'  (通过 vite.config.ts resolve.alias)
+alias: '@aikitr/core' -> 'packages/core/src' (workspace 包导入)
+alias: '@aikitr/ui' -> 'packages/ui/src' (workspace 包导入)
+
+# 问题：core 包内部使用 '@/xxx' 引用自己包的模块
+# 当 app-a 导入 @aikitr/core 时，Vite 应该能把 '@' 解析到 packages/core/src
+
+# 解决方案：
+# 1. 在 app-a 的 vite.config.ts 中，需要为 @aikitr/core 设置正确的 alias
+# 2. core 包的 tsconfig 需要正确配置路径映射
+
+# 当前配置检查：
+# - app-a/vite.config.ts: ✓ 已配置 '@' -> './src'
+# - app-a/vite.config.ts: ✓ 已配置 '@aikitr/core' -> '../../packages/core/src'
+# - core/tsconfig.json: ? 需要检查
