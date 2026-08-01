@@ -1,6 +1,25 @@
 import type { PageMetaDatum, SubPackages } from '@uni-helper/vite-plugin-uni-pages'
 import { isMpWeixin } from '@uni-helper/uni-env'
 
+/** 获取上一个页面 */
+export function getLastPage() {
+  const pages = getCurrentPages()
+  return pages[pages.length - 2]
+}
+
+/** 解析 URL 为对象 */
+export function parseUrlToObj(url: string) {
+  const [path, queryStr] = url.split('?')
+  const query: Record<string, string> = {}
+  if (queryStr) {
+    queryStr.split('&').forEach(item => {
+      const [key, value] = item.split('=')
+      query[key] = value
+    })
+  }
+  return { path, query }
+}
+
 /** 获取当前页面路由信息 */
 export function currRoute() {
   const pages = getCurrentPages()
