@@ -1,6 +1,6 @@
-import type { CustomRequestOptions } from './http/types'
-import { useTokenStore } from './store'
-import { getEnvBaseUrl } from './utils/index'
+import type { CustomRequestOptions } from './types'
+import { useTokenStore } from '../store'
+import { getEnvBaseUrl } from '../utils'
 import { stringifyQuery } from './tools/queryString'
 
 // 请求基准地址

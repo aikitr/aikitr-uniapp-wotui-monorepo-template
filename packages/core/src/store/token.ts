@@ -1,7 +1,7 @@
 import type {
   ILoginForm,
-} from './api/login'
-import type { IAuthLoginRes } from './api/types/login'
+} from '../api/login'
+import type { IAuthLoginRes } from '../api/types/login'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue' // 修复：导入 computed
 import {
@@ -10,9 +10,9 @@ import {
   refreshToken as _refreshToken,
   wxLogin as _wxLogin,
   getWxCode,
-} from './api/login'
-import { isDoubleTokenRes, isSingleTokenRes } from './api/types/login'
-import { isDoubleTokenMode } from './utils/index'
+} from '../api/login'
+import { isDoubleTokenRes, isSingleTokenRes } from '../api/types/login'
+import { isDoubleTokenMode } from '../utils/index'
 import { useUserStore } from './user'
 
 // 初始化状态
