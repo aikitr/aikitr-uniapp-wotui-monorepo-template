@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import FgTabbar from '@aikitr/ui/components/tabbar/index.vue'
-import { isPageTabbar } from '@aikitr/ui/components/tabbar/store'
+// isPageTabbar removed - tabbar visibility is handled by router
 
 const isCurrentPageTabbar = ref(true)
 
