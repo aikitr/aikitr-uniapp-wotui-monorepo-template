@@ -5,12 +5,13 @@ import { createAlova } from 'alova'
 import { createServerTokenAuthentication } from 'alova/client'
 import VueHook from 'alova/vue'
 import { toLoginPage } from '../utils/toLoginPage'
+import { useTokenStore } from '../store/token'
 import { ContentTypeEnum, ResultEnum, ShowMessage } from './tools/enum'
 
 // 配置动态Tag
 export const API_DOMAINS = {
-  DEFAULT: import.meta.env.VITE_SERVER_BASEURL,
-  SECONDARY: import.meta.env.VITE_SERVER_BASEURL_SECONDARY,
+  DEFAULT: import.meta.env.VITE_APP_SERVER_BASEURL,
+  SECONDARY: import.meta.env.VITE_APP_SERVER_BASEURL_SECONDARY,
 }
 
 /**
@@ -25,15 +26,9 @@ const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthenticati
     isExpired: (error) => {
       return error.response?.status === ResultEnum.Unauthorized
     },
+    // 无感刷新统一由 http 层处理；此处仅作登录态失效的兜底跳转
     handler: async () => {
-      try {
-        // await authLogin();
-      }
-      catch (error) {
-        // 切换到登录页
-        toLoginPage({ mode: 'reLaunch' })
-        throw error
-      }
+      toLoginPage({ mode: 'reLaunch' })
     },
   },
 })
@@ -56,21 +51,19 @@ const alovaInstance = createAlova({
     }
 
     const { config } = method
-    const ignoreAuth = !config.meta?.ignoreAuth
-    console.log('ignoreAuth===>', ignoreAuth)
-    // 处理认证信息   自行处理认证问题
-    if (ignoreAuth) {
-      const token = 'getToken()'
+    // 默认需要认证；仅当 meta.ignoreAuth 为 true 时跳过
+    const skipAuth = !!config.meta?.ignoreAuth
+    if (!skipAuth) {
+      const token = useTokenStore().validToken
       if (!token) {
         throw new Error('[请求错误]：未登录')
       }
-      // method.config.headers.token = token;
+      method.config.headers.Authorization = `Bearer ${token}`
     }
 
     // 处理动态域名
     if (config.meta?.domain) {
       method.baseURL = config.meta.domain
-      console.log('当前域名', method.baseURL)
     }
   }),
 

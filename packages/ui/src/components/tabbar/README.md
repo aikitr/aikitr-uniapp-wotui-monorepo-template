@@ -2,7 +2,7 @@
 
 ## tabbar 3种策略
 
-`tabbar` 分为 `4 种` 情况：
+`tabbar` 分为 `3 种` 情况：
 
 - 0 `无 tabbar`，只有一个页面入口，底部无 `tabbar` 显示；常用语临时活动页。
 
@@ -16,8 +16,8 @@
 
 ## tabbar 配置说明
 
-- 如果使用的是 `原生tabbar`，需要配置 `nativeTabbarList`，每个 `item` 需要配置 `path`、`text`、`iconPath`、`selectedIconPath` 等属性。
-- 如果使用的是  `自定义tabbar`，需要配置 `customTabbarList`，每个 `item` 需要配置 `path`、`text`、`icon` 、`iconType` 等属性（如果是 `image` 图片还需要配置2种图片）。
+- 如果使用的是 `原生tabbar`，需要配置 `nativeTabbarList`，每个 `item` 需要配置 `pagePath`、`text`、`iconPath`、`selectedIconPath` 等属性。
+- 如果使用的是  `自定义tabbar`，需要配置 `customTabbarList`，每个 `item` 需要配置 `pagePath`、`text`、`icon` 、`iconType` 等属性（如果是 `image` 图片还需要配置2种图片）。
 
 ## 文件说明
 
@@ -35,7 +35,7 @@
  ```js
   {
     // ... 其他配置
-    "iconType": "uniUi",
+    "iconType": "uiLib",
     "icon": "home",
   }
   ```
@@ -46,7 +46,7 @@
   {
     // ... 其他配置
     // 注意 unocss 图标需要如下处理：（二选一）
-    // 1）在fg-tabbar.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
+    // 1）在index.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
     // 2）配置到 unocss.config.ts 的 safelist 中
     iconType: 'unocss',
     icon: 'i-carbon-code',

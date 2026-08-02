@@ -6,8 +6,12 @@
  * @param {object} [options.erudaOptions] - eruda 配置
  * @param {string} [options.erudaUrl] - eruda 地址
  */
+// ROOT-20: 将 eruda CDN 地址提取为常量，允许通过 options.erudaUrl 或环境变量 ERUDA_URL 覆盖，
+// 避免硬编码到 jsdelivr（内网 / 私有化部署时可指向自建 CDN）
+const DEFAULT_ERUDA_URL = 'https://cdn.jsdelivr.net/npm/eruda'
+
 export default function vitePluginEruda(options = {}) {
-  const { open = true, erudaOptions = {}, erudaUrl = 'https://cdn.jsdelivr.net/npm/eruda' } = options
+  const { open = true, erudaOptions = {}, erudaUrl = process.env.ERUDA_URL || DEFAULT_ERUDA_URL } = options
 
   return {
     name: 'vite-plugin-eruda',

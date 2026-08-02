@@ -16,13 +16,6 @@ declare global {
     formData?: any
   }
 
-  interface IUserInfo {
-    nickname?: string
-    avatar?: string
-    /** 微信的 openid，非微信没有这个字段 */
-    openid?: string
-  }
-
   interface IUserToken {
     token: string
     refreshToken?: string
@@ -72,7 +65,6 @@ declare global {
       complete?: HideLoadingCompleteCallback
       /** 接口调用失败的回调函数 */
       fail?: HideLoadingFailCallback
-      test: UniNamespace.GeneralCallbackResult
       /**
        * 微信小程序：需要基础库： `2.22.1`
        *

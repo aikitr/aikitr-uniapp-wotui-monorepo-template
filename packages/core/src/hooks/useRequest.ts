@@ -28,7 +28,7 @@ export default function useRequest<T, P = undefined>(
   options: IUseRequestOptions<T> = { immediate: false },
 ): IUseRequestReturn<T, P> {
   const loading = ref(false)
-  const error = ref(false)
+  const error = ref<boolean | Error>(false)
   const data = ref<T | undefined>(options.initialData) as Ref<T | undefined>
   const run = async (args?: P) => {
     loading.value = true
@@ -48,7 +48,7 @@ export default function useRequest<T, P = undefined>(
   }
 
   if (options.immediate) {
-    (run as (args: P) => Promise<T | undefined>)({} as P)
+    run({} as P)
   }
   return { loading, error, data, run }
 }

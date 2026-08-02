@@ -4,18 +4,12 @@ import process from 'node:process'
 import { defineManifestConfig } from '@uni-helper/vite-plugin-uni-manifest'
 import { loadEnv } from 'vite'
 
-// 手动解析命令行参数获取 mode
-function getMode() {
-  const args = process.argv.slice(2)
-  const modeFlagIndex = args.findIndex(arg => arg === '--mode')
-  return modeFlagIndex !== -1 ? args[modeFlagIndex + 1] : args[0] === 'build' ? 'production' : 'development' // 默认 development
-}
-// 获取环境变量的范例
-const env = loadEnv(getMode(), path.resolve(process.cwd(), 'env'))
+// 依赖 vite/uni 注入的 NODE_ENV 推断 mode（dev=development, build=production），不再手写 getMode 解析 argv
+const env = loadEnv(process.env.NODE_ENV || 'development', path.resolve(process.cwd(), 'env'))
 const {
   VITE_APP_TITLE,
   VITE_UNI_APPID,
-  VITE_WX_APPID,
+  VITE_APP_WX_APPID,
   VITE_APP_PUBLIC_BASE,
   VITE_FALLBACK_LOCALE,
 } = env
@@ -28,7 +22,7 @@ export default defineManifestConfig({
   'versionName': '1.0.0',
   'versionCode': '100',
   'transformPx': false,
-  'locale': VITE_FALLBACK_LOCALE, // 'zh-Hans'
+  'locale': VITE_FALLBACK_LOCALE || 'zh-Hans', // 'zh-Hans'
   'h5': {
     router: {
       base: VITE_APP_PUBLIC_BASE,
@@ -118,7 +112,7 @@ export default defineManifestConfig({
   'quickapp': {},
   /* 小程序特有相关 */
   'mp-weixin': {
-    appid: VITE_WX_APPID,
+    appid: VITE_APP_WX_APPID,
     setting: {
       urlCheck: false,
       // 是否启用 ES6 转 ES5

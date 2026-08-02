@@ -3,7 +3,6 @@ import process from 'node:process'
 import Uni from '@uni-helper/plugin-uni'
 import { isMpWeixin } from '@uni-helper/uni-env'
 import UniComponents from '@uni-helper/vite-plugin-uni-components'
-import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import UniPlatform from '@uni-helper/vite-plugin-uni-platform'
@@ -15,10 +14,10 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig, loadEnv } from 'vite'
 import ViteRestart from 'vite-plugin-restart'
-import openDevTools from '../../scripts/open-dev-tools.js'
-import vitePluginEruda from '../../scripts/vite-plugin-eruda.js'
-import { createCopyNativeResourcesPlugin } from '../../vite-plugins/copy-native-resources.js'
-import syncManifestPlugin from '../../vite-plugins/sync-manifest-plugins.js'
+import openDevTools from '../../scripts/open-dev-tools'
+import vitePluginEruda from '../../scripts/vite-plugin-eruda'
+import { createCopyNativeResourcesPlugin } from '../../vite-plugins/copy-native-resources'
+import syncManifestPlugin from '../../vite-plugins/sync-manifest-plugins'
 
 export default defineConfig(({ command, mode }) => {
   const { UNI_PLATFORM, SKIP_OPEN_DEVTOOLS } = process.env
@@ -28,13 +27,14 @@ export default defineConfig(({ command, mode }) => {
   const localEnv = loadEnv(mode, envDir, '')
   const {
     VITE_APP_PORT,
-    VITE_SERVER_BASEURL,
+    VITE_APP_SERVER_BASEURL,
     VITE_APP_TITLE,
     VITE_DELETE_CONSOLE,
     VITE_APP_PUBLIC_BASE,
     VITE_APP_PROXY_ENABLE,
     VITE_APP_PROXY_PREFIX,
     VITE_COPY_NATIVE_RES_ENABLE,
+    VITE_SHOW_SOURCEMAP,
   } = env
   const { WECHAT_DEVTOOLS_CLI_PATH } = localEnv
 
@@ -49,11 +49,9 @@ export default defineConfig(({ command, mode }) => {
         '@aikitr/ui': path.resolve(__dirname, '../../packages/ui/src'),
         // App src
         '@': path.resolve(__dirname, './src'),
-        '@img': path.resolve(__dirname, './src/static/images'),
       },
     },
     plugins: [
-      UniLayouts(),
       UniPlatform(),
       UniManifest(),
       UniComponents({
@@ -95,7 +93,7 @@ export default defineConfig(({ command, mode }) => {
         vueTemplate: true,
       }),
       ViteRestart({
-        restart: ['vite.config.js'],
+        restart: ['vite.config.ts'],
       }),
       UNI_PLATFORM === 'h5' && {
         name: 'html-transform',
@@ -136,7 +134,7 @@ export default defineConfig(({ command, mode }) => {
       proxy: JSON.parse(VITE_APP_PROXY_ENABLE)
         ? {
             [VITE_APP_PROXY_PREFIX]: {
-              target: VITE_SERVER_BASEURL,
+              target: VITE_APP_SERVER_BASEURL,
               changeOrigin: true,
               rewrite: path =>
                 path.replace(new RegExp(`^${VITE_APP_PROXY_PREFIX}`), ''),
@@ -148,7 +146,7 @@ export default defineConfig(({ command, mode }) => {
       drop: VITE_DELETE_CONSOLE === 'true' ? ['console', 'debugger'] : [],
     },
     build: {
-      sourcemap: false,
+      sourcemap: VITE_SHOW_SOURCEMAP === 'true',
       target: 'es6',
       minify: mode === 'development' ? false : 'esbuild',
     },

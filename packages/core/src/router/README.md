@@ -53,3 +53,12 @@ definePage({
 特殊情况例外，如业务需要跨平台复用登录注册页时，也可以用在 `小程序` 上，所以主要还是看业务需求。
 
 通过一个参数 `LOGIN_PAGE_ENABLE_IN_MP` 来控制是否在 `小程序` 中使用 `H5登录页` 的登录逻辑。
+
+## 登录守卫的两种实现（并存说明，对应 CODE_REVIEW CORE-19）
+
+本包目前提供两套登录守卫，**并存**于 free 应用，请勿误以为其中一套是多余的：
+
+- `interceptor.ts`（`routeInterceptor`）：基于 uni 拦截器（`uni.addInterceptor`），在 `apps/free/src/main.ts` 中 `app.use(routeInterceptor)` 安装，拦截 `navigateTo / reLaunch / redirectTo / switchTab`。
+- `permission.ts`（`permission`）：基于 vue-router `beforeEach`，在 `apps/free/src/App.vue` 中 `permission.install(router)` 安装。
+
+两者职责不同：`interceptor.ts` 负责 uni 层面的路由拦截与登录跳转；`permission.ts` 当前仅做 tabbar 同步（emit `route:tabbar`，由 ui 的 tabbar store 订阅）。如后续要统一为单一方案，需先在 H5 跑通验证（见 FREE-01），避免破坏自定义 tabbar 的同步。

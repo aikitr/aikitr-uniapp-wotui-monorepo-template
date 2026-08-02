@@ -45,27 +45,16 @@ export const customTabbarList: CustomTabBarItem[] = [
     text: '首页',
     pagePath: 'pages/index/index',
     // 注意 unocss 图标需要如下处理：（二选一）
-    // 1）在fg-tabbar.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
+    // 1）在index.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
     // 2）配置到 unocss.config.ts 的 safelist 中
     iconType: 'unocss',
     icon: 'i-carbon-home',
     // badge: 'dot',
   },
-  // 鼓包配置示例（2025-12-31）
-  // 中间鼓包tabbarItem配置：通常是扫描按钮、发布按钮、更多按钮等，点击触发业务逻辑
-  // {
-  //   pagePath: 'pages/me/me',
-  //   text: '我的',
-  //   // 1）在fg-tabbar.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
-  //   // 2）配置到 unocss.config.ts 的 safelist 中
-  //   iconType: 'image',
-  //   icon: '/static/tabbar/scan.png',
-  //   isBulge: true,
-  // },
   {
     pagePath: 'pages/about/about',
     text: '关于',
-    // 1）在fg-tabbar.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
+    // 1）在index.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
     // 2）配置到 unocss.config.ts 的 safelist 中
     iconType: 'unocss',
     icon: 'i-carbon-menu',
@@ -75,38 +64,13 @@ export const customTabbarList: CustomTabBarItem[] = [
   {
     pagePath: 'pages/me/me',
     text: '我的',
-    // 1）在fg-tabbar.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
+    // 1）在index.vue页面上引入一下并注释掉（见tabbar/index.vue代码第2行）
     // 2）配置到 unocss.config.ts 的 safelist 中
     iconType: 'unocss',
     icon: 'i-carbon-user',
     // badge: 10,
   },
 
-  // 其他类型演示
-  // 1、uiLib
-  // {
-  //   pagePath: 'pages/index/index',
-  //   text: '首页',
-  //   iconType: 'uiLib',
-  //   icon: 'home',
-  // },
-  // 2、iconfont
-  // {
-  //   pagePath: 'pages/index/index',
-  //   text: '首页',
-  //   // 注意 iconfont 图标需要额外加上 'iconfont'，如下
-  //   iconType: 'iconfont',
-  //   icon: 'iconfont icon-my',
-  // },
-  // 3、image
-  // {
-  //   pagePath: 'pages/index/index',
-  //   text: '首页',
-  //   // 使用 ‘image’时，需要配置 icon + iconActive 2张图片
-  //   iconType: 'image',
-  //   icon: '/static/tabbar/home.png',
-  //   iconActive: '/static/tabbar/homeHL.png',
-  // },
 ]
 
 /**
@@ -129,7 +93,9 @@ export const customTabbarEnable = [TABBAR_STRATEGY_MAP.CUSTOM_TABBAR].includes(s
 export const needHideNativeTabbar = selectedTabbarStrategy === TABBAR_STRATEGY_MAP.CUSTOM_TABBAR
 
 const _tabbarList = customTabbarEnable ? customTabbarList.map(item => ({ text: item.text, pagePath: item.pagePath })) : nativeTabbarList
-export const tabbarList = customTabbarEnable ? customTabbarList : nativeTabbarList
+// UI-06：原名为 tabbarList，与 store.ts 导出的同名 computed 冲突（barrel export * 会静默丢弃），
+// 改名为 rawTabbarList 明确表示「配置原始列表」（未经角色过滤）
+export const rawTabbarList = customTabbarEnable ? customTabbarList : nativeTabbarList
 
 const _tabbar: TabBar = {
   // 只有微信小程序支持 custom。App 和 H5 不生效

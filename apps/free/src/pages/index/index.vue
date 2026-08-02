@@ -15,11 +15,6 @@ definePage({
 const description = ref(
   'aikitr 是一个基于 uniapp + Vue3 + TypeScript + Vite5 + UnoCSS 的跨平台开发模板，快速启动多端应用开发，支持 H5、小程序和 APP。',
 )
-console.log('index/index 首页打印了')
-
-onLoad(() => {
-  console.log('测试 uni API 自动引入: onLoad')
-})
 </script>
 
 <template>

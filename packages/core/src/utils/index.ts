@@ -45,8 +45,16 @@ export function isPageTabbar(path: string) {
 
 /** 获取环境 base URL */
 export function getEnvBaseUrl() {
-  return import.meta.env.VITE_SERVER_BASEURL
+  return import.meta.env.VITE_APP_SERVER_BASEURL
 }
 
 /** 判断是否为双 token 模式 */
 export const isDoubleTokenMode = import.meta.env.VITE_AUTH_MODE === 'double'
+
+// 补齐 barrel 导出（CORE-11：避免 debounce/toLoginPage/uploadFile 成为只能 deep import 的孤儿）
+export { debounce } from './debounce'
+export { toLoginPage } from './toLoginPage'
+export * from './uploadFile'
+
+// 事件总线（用于 core 与 ui 的解耦通信，避免 core 反向依赖 ui）
+export { on, off, emit } from './eventBus'

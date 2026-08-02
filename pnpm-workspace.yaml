@@ -33,8 +33,10 @@ catalog:
 
 overrides:
   unconfig: 7.5.0
-# 允许这些依赖在安装时执行 build 脚本（esbuild 等需要）
-onlyBuiltDependencies:
-  - '@uni-helper/unocss-preset-uni'
-  - core-js
-  - esbuild
+# 允许这些依赖在安装时执行 build 脚本。pnpm v11 用 allowBuilds 作为构建审批的权威字段，
+# deps-status-check 据此放行（之前 .npmrc 的 ignoredBuiltDependencies 与 workspace 的
+# onlyBuiltDependencies 意图相反，现统一为 allowBuilds）。.npmrc 也保留 only-built-dependencies 兜底。
+allowBuilds:
+  '@uni-helper/unocss-preset-uni': true
+  core-js: true
+  esbuild: true

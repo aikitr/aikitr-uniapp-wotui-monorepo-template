@@ -2,7 +2,7 @@ import { getUserInfo } from '../api/login'
 import { describe, expect, it, vi } from 'vitest'
 import { useUserStore } from './user'
 
-vi.mock('@/api/login', () => ({
+vi.mock('../api/login', () => ({
   getUserInfo: vi.fn(),
 }))
 

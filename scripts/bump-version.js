@@ -4,7 +4,8 @@ import process from 'node:process'
 import enquirer from 'enquirer'
 import pc from 'picocolors'
 
-const manifestPath = path.resolve(process.cwd(), 'manifest.config.ts')
+// 真实 manifest 在 apps/free（根 manifest.config.ts 是 ARCH-01 已删除的孤儿副本）
+const manifestPath = path.resolve(process.cwd(), 'apps/free/manifest.config.ts')
 // 获取是否只是测试运行
 const dryRun = process.argv.includes('--dry-run')
 

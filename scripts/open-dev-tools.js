@@ -44,11 +44,17 @@ function _openDevTools(env = 'dev', options = {}) {
       command = `/Applications/抖音开发者工具.app/Contents/MacOS/抖音开发者工具 --p "${projectPath}"`
     }
   }
-  else if (platform === 'win32' || platform === 'win64') {
-    // Windows
+  else if (platform === 'win32') {
+    // Windows（ROOT-15: Node 只有 win32，没有 win64）
     if (UNI_PLATFORM === 'mp-weixin') {
       const cliPath = wechatDevtoolsCliPath || 'C:\\Program Files (x86)\\Tencent\\微信web开发者工具\\cli.bat'
       command = `"${cliPath}" -o "${projectPath}"`
+    }
+    else if (UNI_PLATFORM === 'mp-alipay') {
+      command = `"C:\\Program Files\\支付宝小程序开发者工具\\cli.bat" -o "${projectPath}"`
+    }
+    else if (UNI_PLATFORM === 'mp-lark') {
+      command = `"C:\\Program Files\\抖音开发者工具\\cli.bat" -o "${projectPath}"`
     }
   }
   else {

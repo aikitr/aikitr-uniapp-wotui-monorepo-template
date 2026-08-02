@@ -43,6 +43,29 @@ describe('TabbarItem', () => {
     expect(wrapper.html()).toContain('i-carbon-home')
   })
 
+  it('iconType=uiLib 时渲染 wd-icon（UI-05 实现，不再是空实现）', () => {
+    const item: CustomTabBarItem = { ...baseItem, iconType: 'uiLib', icon: 'home' }
+    wrapper = mount(TabbarItem, {
+      props: { item, index: 0 },
+    })
+    expect(wrapper.html()).toContain('wd-icon')
+    expect(wrapper.html()).toContain('home')
+  })
+
+  it('iconType=image 且有 iconActive 时按 curIdx 切换高亮图', () => {
+    const item: CustomTabBarItem = {
+      ...baseItem,
+      iconType: 'image',
+      icon: '/static/tabbar/home.png',
+      iconActive: '/static/tabbar/homeHL.png',
+    }
+    wrapper = mount(TabbarItem, {
+      props: { item, index: 0 },
+    })
+    // mock store 中 curIdx=0，与 index 相同 → 取 iconActive
+    expect(wrapper.html()).toContain('/static/tabbar/homeHL.png')
+  })
+
   it('badge=dot 时渲染小红点（包含 rounded-full 样式）', () => {
     const item: CustomTabBarItem = { ...baseItem, badge: 'dot' }
     wrapper = mount(TabbarItem, {

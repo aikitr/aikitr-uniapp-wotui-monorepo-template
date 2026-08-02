@@ -3,8 +3,8 @@
  * 路由拦截，通常也是登录拦截
  * 黑、白名单的配置，请看 config.ts 文件， EXCLUDE_LOGIN_PATH_LIST
  */
-import { tabbarStore } from '@aikitr/ui/components/tabbar/store'
-import { getLastPage, parseUrlToObj } from '@aikitr/core/utils/index'
+import { emit } from '../utils/eventBus'
+import { getLastPage, parseUrlToObj } from '../utils/index'
 
 export const FG_LOG_ENABLE = false
 
@@ -45,7 +45,8 @@ export const navigateToInterceptor = {
     // }
 
     // 处理直接进入路由非首页时，tabbarIndex 不正确的问题
-    tabbarStore.setAutoCurIdx(path)
+    // 通过事件总线通知 ui 包（core 不再反向依赖 ui 包）
+    emit('route:tabbar', path)
   },
 }
 

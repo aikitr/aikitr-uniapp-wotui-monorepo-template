@@ -1,9 +1,9 @@
 import type {
   ILoginForm,
 } from '../api/login'
-import type { IAuthLoginRes } from '../api/types/login'
+import type { IAuthLoginRes } from '../types/auth'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue' // 修复：导入 computed
+import { computed, ref } from 'vue'
 import {
   login as _login,
   logout as _logout,
@@ -11,7 +11,7 @@ import {
   wxLogin as _wxLogin,
   getWxCode,
 } from '../api/login'
-import { isDoubleTokenRes, isSingleTokenRes } from '../api/types/login'
+import { isDoubleTokenRes, isSingleTokenRes } from '../types/auth'
 import { isDoubleTokenMode } from '../utils/index'
 import { useUserStore } from './user'
 
@@ -270,7 +270,6 @@ export const useTokenStore = defineStore(
      * 建议这样使用tokenStore.updateNowTime().hasLogin
      */
     const hasValidLogin = computed(() => {
-      console.log('hasValidLogin', hasLoginInfo.value, !isTokenExpired.value)
       return hasLoginInfo.value && !isTokenExpired.value
     })
 

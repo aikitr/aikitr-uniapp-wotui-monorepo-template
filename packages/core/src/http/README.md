@@ -15,7 +15,7 @@
 ## 关于 http 使用
 
 ```ts
-import { http } from '@/http/http'
+import { http } from '@aikitr/core/http'
 
 interface IUserInfoRes {
   id: number
@@ -34,7 +34,7 @@ export function updateUserInfo(data: Partial<IUserInfoRes>) {
 响应成功时会返回业务 `data`；业务错误、登录失效、HTTP 状态码异常和网络异常会统一 reject `HttpError`：
 
 ```ts
-import type { HttpError } from '@/http/types'
+import type { HttpError } from '@aikitr/core/http/types'
 
 try {
   const userInfo = await getUserInfo()

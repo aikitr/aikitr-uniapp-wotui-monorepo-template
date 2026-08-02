@@ -1,7 +1,6 @@
-import type { IDoubleTokenRes } from '../api/types/login'
+import type { IDoubleTokenRes } from '../types/auth'
 import type { CustomRequestOptions, HttpError, IResponse } from '../http/types'
 import { nextTick } from 'vue'
-import { useTokenStore } from '../store/token'
 import { isDoubleTokenMode } from '../utils/index'
 import { toLoginPage } from '../utils/toLoginPage'
 import { createHttpError, getResponseMessage, HttpErrorType, isSuccessResultCode, ResultEnum, ShowMessage } from './tools/enum'
@@ -28,6 +27,8 @@ export function http<T>(options: CustomRequestOptions) {
         const isTokenExpired = res.statusCode === 401 || code === ResultEnum.Unauthorized
 
         if (isTokenExpired) {
+          // 通过动态 import 获取 token store，打破 http → store → api → http 的静态循环依赖
+          const { useTokenStore } = await import('../store/token')
           const tokenStore = useTokenStore()
           if (!isDoubleTokenMode) {
             // 未启用双token策略，清理用户信息，跳转到登录页

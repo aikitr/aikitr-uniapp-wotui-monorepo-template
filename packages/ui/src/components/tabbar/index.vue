@@ -11,14 +11,13 @@ defineOptions({
 })
 // #endif
 
+const emit = defineEmits<{ 'bulge-click': [index: number] }>()
+
 /**
- * 中间的鼓包tabbarItem的点击事件
+ * 中间的鼓包tabbarItem的点击事件：交给消费方处理（UI-04，库组件不内置业务行为）
  */
-function handleClickBulge() {
-  uni.showToast({
-    title: '点击了中间的鼓包tabbarItem',
-    icon: 'none',
-  })
+function handleClickBulge(index: number) {
+  emit('bulge-click', index)
 }
 
 function handleClick(index: number) {
@@ -31,7 +30,7 @@ function handleClick(index: number) {
     return
   }
   if (list[index].isBulge) {
-    handleClickBulge()
+    handleClickBulge(index)
     return
   }
   const url = list[index].pagePath
@@ -89,7 +88,7 @@ onMounted(() => {
 })
 // #endif
 const activeColor = 'var(--wot-color-theme, #1890ff)'
-const inactiveColor = '#666'
+const inactiveColor = 'var(--wot-tabbar-inactive-color, #666)'
 function getColorByIndex(index: number) {
   return tabbarStore.curIdx === index ? activeColor : inactiveColor
 }
@@ -114,8 +113,6 @@ function getColorByIndex(index: number) {
           <TabbarItem v-else :item="item" :index="index" class="relative px-3 text-center" />
         </view>
       </view>
-
-      <view class="pb-safe" />
     </view>
   </view>
 </template>

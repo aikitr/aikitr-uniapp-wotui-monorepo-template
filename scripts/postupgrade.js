@@ -46,7 +46,7 @@ function log(message, type = 'log') {
 async function uninstallDependency(dep) {
   try {
     log(`开始卸载依赖: ${dep}`)
-    const { stdout, stderr } = await execPromise(`pnpm un ${dep}`)
+    const { stdout, stderr } = await execPromise(`pnpm --filter free un ${dep}`)
     if (stdout) {
       log(`stdout [${dep}]: ${stdout}`)
     }

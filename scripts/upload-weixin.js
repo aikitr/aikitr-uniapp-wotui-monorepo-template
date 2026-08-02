@@ -15,7 +15,7 @@
  *   1. 确保已在微信公众平台开通 "小程序代码上传" 权限
  *   2. 确保私钥文件存在（private.${appid}.key），并且配置了上传IP白名单
  *   3. 上传前会自动执行 build:mp:prod 构建 并跳过打开开发者工具
- *   4. 秘钥文件的appid(VITE_WX_APPID)需要与微信公众平台的小程序appid一致
+ *   4. 秘钥文件的appid(VITE_APP_WX_APPID)需要与微信公众平台的小程序appid一致
  */
 
 import { execSync } from 'node:child_process'
@@ -103,8 +103,9 @@ function parseArgs() {
 
 // 读取环境变量
 function loadEnvFile(mode = 'production') {
-  const envPath = path.resolve(ROOT_DIR, 'env', `.env.${mode}`)
-  const defaultEnvPath = path.resolve(ROOT_DIR, 'env', '.env')
+  // ROOT-17: env 文件在 apps/free（真实 app 包），不在仓库根
+  const envPath = path.resolve(ROOT_DIR, 'apps/free', 'env', `.env.${mode}`)
+  const defaultEnvPath = path.resolve(ROOT_DIR, 'apps/free', 'env', '.env')
 
   const envContent = {}
 
@@ -163,10 +164,10 @@ async function main() {
 
   const params = parseArgs()
   const env = loadEnvFile('production')
-  const appid = env.VITE_WX_APPID
+  const appid = env.VITE_APP_WX_APPID
 
   if (!appid) {
-    throw new Error('未找到 VITE_WX_APPID 环境变量，请检查 env/.env 文件')
+    throw new Error('未找到 VITE_APP_WX_APPID 环境变量，请检查 env/.env 文件')
   }
 
   console.log(`📱 AppID: ${appid}`)
@@ -181,7 +182,7 @@ async function main() {
   // 构建小程序（跳过自动打开开发者工具）
   console.log('\n📦 正在构建小程序...（跳过自动打开开发者工具）\n')
   try {
-    execSync('pnpm build:mp:prod', {
+    execSync('pnpm --filter free build:mp', {
       cwd: ROOT_DIR,
       stdio: 'inherit',
       env: {
@@ -196,7 +197,8 @@ async function main() {
   }
 
   // 小程序代码目录
-  const projectPath = path.resolve(ROOT_DIR, 'dist', 'build', 'mp-weixin')
+  // ROOT-17: 构建产物在 apps/free/dist/build/mp-weixin（不在仓库根 dist）
+  const projectPath = path.resolve(ROOT_DIR, 'apps/free', 'dist', 'build', 'mp-weixin')
 
   if (!fs.existsSync(projectPath)) {
     throw new Error(`构建产物不存在: ${projectPath}`)

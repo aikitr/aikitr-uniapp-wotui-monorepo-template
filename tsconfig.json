@@ -10,7 +10,7 @@
   "references": [
     { "path": "packages/core" },
     { "path": "packages/ui" },
-    { "path": "packages/apps/app-a" }
+    { "path": "apps/free" }
   ],
   "exclude": ["node_modules", "dist"]
 }

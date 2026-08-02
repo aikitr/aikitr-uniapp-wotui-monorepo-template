@@ -1,8 +1,9 @@
 import type { CustomTabBarItem, CustomTabBarItemBadge } from './types'
 import { computed, reactive } from 'vue'
 import { useUserStore } from '@aikitr/core/store/user'
+import { on } from '@aikitr/core/utils'
 
-import { tabbarList as _tabbarList, selectedTabbarStrategy, TABBAR_STRATEGY_MAP } from './config'
+import { rawTabbarList as _tabbarList, selectedTabbarStrategy, TABBAR_STRATEGY_MAP } from './config'
 
 /** tabbarList 里面的 path 从 pages.config.ts 得到 */
 const baseTabbarList = reactive<CustomTabBarItem[]>(_tabbarList.map(item => ({
@@ -67,7 +68,6 @@ function findTabbarIndexByPath(path?: string) {
  */
 const tabbarStore = reactive({
   curIdx: uni.getStorageSync('app-tabbar-index') || 0,
-  prevIdx: uni.getStorageSync('app-tabbar-index') || 0,
   setCurIdx(idx: number) {
     this.curIdx = idx
     uni.setStorageSync('app-tabbar-index', idx)
@@ -113,12 +113,9 @@ const tabbarStore = reactive({
     }
     return findTabbarIndexByPath(getCurrentPagePath()) === index
   },
-  restorePrevIdx() {
-    if (this.prevIdx === this.curIdx)
-      return
-    this.setCurIdx(this.prevIdx)
-    this.prevIdx = uni.getStorageSync('app-tabbar-index') || 0
-  },
 })
 
 export { tabbarList, tabbarStore }
+
+// 接收来自 core 路由拦截器的 tabbar 同步事件，避免 core 反向依赖 ui 包
+on('route:tabbar', (path: string) => tabbarStore.setAutoCurIdx(path))

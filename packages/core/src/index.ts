@@ -11,4 +11,4 @@ export { default as http } from '../http/http'
 export type { HttpError, CustomRequestOptions_ } from '../http/types'
 
 // Re-export types from types directory
-export type { IResData, IUserInfo, IUserToken, IUniUploadFileOptions } from './types/typings'
+export type { IUniUploadFileOptions } from './types/typings'
