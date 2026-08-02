@@ -12,7 +12,7 @@ const formData = ref({
 })
 
 // Toast 提示
-const showToast = (type: string) => {
+function showToast(type: string) {
   uni.showToast({
     title: `${type} 提示`,
     icon: type === 'success' ? 'success' : type === 'error' ? 'error' : 'none',
@@ -20,7 +20,7 @@ const showToast = (type: string) => {
 }
 
 // Loading 示例
-const showLoading = () => {
+function showLoading() {
   uni.showLoading({ title: '加载中...' })
   setTimeout(() => {
     uni.hideLoading()
@@ -28,14 +28,15 @@ const showLoading = () => {
 }
 
 // 确认框示例
-const showConfirm = () => {
+function showConfirm() {
   uni.showModal({
     title: '提示',
     content: '这是一个确认框示例',
     success: (res) => {
       if (res.confirm) {
         uni.showToast({ title: '确认', icon: 'success' })
-      } else {
+      }
+      else {
         uni.showToast({ title: '取消', icon: 'none' })
       }
     },
@@ -55,11 +56,21 @@ const showConfirm = () => {
     <view class="section">
       <text class="section-title">按钮</text>
       <view class="button-group">
-        <wd-button type="primary" block>主要按钮</wd-button>
-        <wd-button type="success" block>成功按钮</wd-button>
-        <wd-button type="warning" block>警告按钮</wd-button>
-        <wd-button type="danger" block>危险按钮</wd-button>
-        <wd-button type="info" block>信息按钮</wd-button>
+        <wd-button type="primary" block>
+          主要按钮
+        </wd-button>
+        <wd-button type="success" block>
+          成功按钮
+        </wd-button>
+        <wd-button type="warning" block>
+          警告按钮
+        </wd-button>
+        <wd-button type="danger" block>
+          危险按钮
+        </wd-button>
+        <wd-button type="info" block>
+          信息按钮
+        </wd-button>
       </view>
       <view class="button-group mt-20">
         <wd-button :loading="buttonLoading" @click="buttonLoading = !buttonLoading">
@@ -75,10 +86,18 @@ const showConfirm = () => {
     <view class="section">
       <text class="section-title">Toast 提示</text>
       <view class="button-row">
-        <wd-button size="small" @click="showToast('success')">成功</wd-button>
-        <wd-button size="small" type="error" @click="showToast('error')">错误</wd-button>
-        <wd-button size="small" type="warning" @click="showToast('warning')">警告</wd-button>
-        <wd-button size="small" type="info" @click="showToast('info')">信息</wd-button>
+        <wd-button size="small" @click="showToast('success')">
+          成功
+        </wd-button>
+        <wd-button size="small" type="error" @click="showToast('error')">
+          错误
+        </wd-button>
+        <wd-button size="small" type="warning" @click="showToast('warning')">
+          警告
+        </wd-button>
+        <wd-button size="small" type="info" @click="showToast('info')">
+          信息
+        </wd-button>
       </view>
     </view>
 
@@ -119,17 +138,17 @@ const showConfirm = () => {
     <view class="section">
       <text class="section-title">Tabs 标签页</text>
       <wd-tabs>
-        <wd-tab title="标签一" key="1">
+        <wd-tab key="1" title="标签一">
           <view class="tab-content">
             <text>这是第一个标签页的内容</text>
           </view>
         </wd-tab>
-        <wd-tab title="标签二" key="2">
+        <wd-tab key="2" title="标签二">
           <view class="tab-content">
             <text>这是第二个标签页的内容</text>
           </view>
         </wd-tab>
-        <wd-tab title="标签三" key="3">
+        <wd-tab key="3" title="标签三">
           <view class="tab-content">
             <text>这是第三个标签页的内容</text>
           </view>
@@ -163,13 +182,13 @@ const showConfirm = () => {
       </view>
     </view>
 
-    <!-- 指示器示例 -->
+    <!-- 进度条示例（wot-design-uni 1.9+ 已用 wd-progress 取代 wd-indicator） -->
     <view class="section">
-      <text class="section-title">Indicator 指示器</text>
+      <text class="section-title">Progress 进度条</text>
       <view class="indicator-demo">
-        <wd-indicator :progress="30" />
-        <wd-indicator :progress="60" type="circle" style="margin-top: 20rpx;" />
-        <wd-indicator :progress="100" type="circle" status="success" style="margin-top: 20rpx;" />
+        <wd-progress :percentage="30" />
+        <wd-progress :percentage="60" style="margin-top: 20rpx;" />
+        <wd-progress :percentage="100" status="success" style="margin-top: 20rpx;" />
       </view>
     </view>
   </view>

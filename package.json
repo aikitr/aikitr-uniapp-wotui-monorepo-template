@@ -15,7 +15,13 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.4.8",
-    "typescript": "~5.8.0"
+    "@dcloudio/types": "catalog:",
+    "@uni-helper/eslint-config": "0.5.0",
+    "eslint": "^9.39.5",
+    "lint-staged": "^15.5.2",
+    "typescript": "catalog:"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --fix"
   }
 }

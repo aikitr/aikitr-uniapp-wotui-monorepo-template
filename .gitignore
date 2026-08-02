@@ -27,3 +27,6 @@ Thumbs.db
 src/manifest.json
 src/pages.json
 src/types/*.d.ts
+
+# Assistant workspace memory (internal, not project code)
+.workbuddy/
